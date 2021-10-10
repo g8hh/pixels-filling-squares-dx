@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	
+	<meta charset="utf-8">
+	
+	<title>Squares 2</title>
+	
+	<meta id="viewport" name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	
+	
+	<link rel="shortcut icon" type="image/png" href="./favicon.png">
+	<script src='kongregate_api.js'></script>
+	
+	<script type="text/javascript" src="./lib/howler.min.js"></script>
+	<script type="text/javascript" src="./lib/pako.min.js"></script>
+	<script type="text/javascript" src="./Squares2.js"></script>
+	
+	<script>
+		window.addEventListener ("touchmove", function (event) { event.preventDefault (); }, false);
+		if (typeof window.devicePixelRatio != 'undefined' && window.devicePixelRatio > 2) {
+			var meta = document.getElementById ("viewport");
+			meta.setAttribute ('content', 'width=device-width, initial-scale=' + (2 / window.devicePixelRatio) + ', user-scalable=no');
+		}
+	</script>
+	
+	<style>
+		html,body { margin: 0; padding: 0; height: 100%; overflow: hidden; }
+		#openfl-content { background: #000000; width: 100%; height: 100%; }
+		
+		@font-face {
+			font-family: 'Open Sans Bold';
+			src: url('font/OpenSans-Bold.eot');
+			src: url('font/OpenSans-Bold.eot?#iefix') format('embedded-opentype'),
+			url('font/OpenSans-Bold.svg#my-font-family') format('svg'),
+			url('font/OpenSans-Bold.woff') format('woff'),
+			url('font/OpenSans-Bold.ttf') format('truetype');
+			font-weight: normal;
+			font-style: normal;
+		}
+		@font-face {
+			font-family: 'Open Sans Bold Italic';
+			src: url('font/OpenSans-BoldItalic.eot');
+			src: url('font/OpenSans-BoldItalic.eot?#iefix') format('embedded-opentype'),
+			url('font/OpenSans-BoldItalic.svg#my-font-family') format('svg'),
+			url('font/OpenSans-BoldItalic.woff') format('woff'),
+			url('font/OpenSans-BoldItalic.ttf') format('truetype');
+			font-weight: normal;
+			font-style: normal;
+		}
+		@font-face {
+			font-family: 'Open Sans Extrabold';
+			src: url('font/OpenSans-ExtraBold.eot');
+			src: url('font/OpenSans-ExtraBold.eot?#iefix') format('embedded-opentype'),
+			url('font/OpenSans-ExtraBold.svg#my-font-family') format('svg'),
+			url('font/OpenSans-ExtraBold.woff') format('woff'),
+			url('font/OpenSans-ExtraBold.ttf') format('truetype');
+			font-weight: normal;
+			font-style: normal;
+		}
+		@font-face {
+			font-family: 'Open Sans Extrabold Italic';
+			src: url('font/OpenSans-ExtraBoldItalic.eot');
+			src: url('font/OpenSans-ExtraBoldItalic.eot?#iefix') format('embedded-opentype'),
+			url('font/OpenSans-ExtraBoldItalic.svg#my-font-family') format('svg'),
+			url('font/OpenSans-ExtraBoldItalic.woff') format('woff'),
+			url('font/OpenSans-ExtraBoldItalic.ttf') format('truetype');
+			font-weight: normal;
+			font-style: normal;
+		}
+		@font-face {
+			font-family: 'Open Sans Italic';
+			src: url('font/OpenSans-Italic.eot');
+			src: url('font/OpenSans-Italic.eot?#iefix') format('embedded-opentype'),
+			url('font/OpenSans-Italic.svg#my-font-family') format('svg'),
+			url('font/OpenSans-Italic.woff') format('woff'),
+			url('font/OpenSans-Italic.ttf') format('truetype');
+			font-weight: normal;
+			font-style: normal;
+		}
+		@font-face {
+			font-family: 'Open Sans Light';
+			src: url('font/OpenSans-Light.eot');
+			src: url('font/OpenSans-Light.eot?#iefix') format('embedded-opentype'),
+			url('font/OpenSans-Light.svg#my-font-family') format('svg'),
+			url('font/OpenSans-Light.woff') format('woff'),
+			url('font/OpenSans-Light.ttf') format('truetype');
+			font-weight: normal;
+			font-style: normal;
+		}
+		@font-face {
+			font-family: 'Open Sans Light Italic';
+			src: url('font/OpenSans-LightItalic.eot');
+			src: url('font/OpenSans-LightItalic.eot?#iefix') format('embedded-opentype'),
+			url('font/OpenSans-LightItalic.svg#my-font-family') format('svg'),
+			url('font/OpenSans-LightItalic.woff') format('woff'),
+			url('font/OpenSans-LightItalic.ttf') format('truetype');
+			font-weight: normal;
+			font-style: normal;
+		}
+		@font-face {
+			font-family: 'Open Sans';
+			src: url('font/OpenSans-Regular.eot');
+			src: url('font/OpenSans-Regular.eot?#iefix') format('embedded-opentype'),
+			url('font/OpenSans-Regular.svg#my-font-family') format('svg'),
+			url('font/OpenSans-Regular.woff') format('woff'),
+			url('font/OpenSans-Regular.ttf') format('truetype');
+			font-weight: normal;
+			font-style: normal;
+		}
+		@font-face {
+			font-family: 'Open Sans Semibold';
+			src: url('font/OpenSans-Semibold.eot');
+			src: url('font/OpenSans-Semibold.eot?#iefix') format('embedded-opentype'),
+			url('font/OpenSans-Semibold.svg#my-font-family') format('svg'),
+			url('font/OpenSans-Semibold.woff') format('woff'),
+			url('font/OpenSans-Semibold.ttf') format('truetype');
+			font-weight: normal;
+			font-style: normal;
+		}
+		@font-face {
+			font-family: 'Open Sans Semibold Italic';
+			src: url('font/OpenSans-SemiboldItalic.eot');
+			src: url('font/OpenSans-SemiboldItalic.eot?#iefix') format('embedded-opentype'),
+			url('font/OpenSans-SemiboldItalic.svg#my-font-family') format('svg'),
+			url('font/OpenSans-SemiboldItalic.woff') format('woff'),
+			url('font/OpenSans-SemiboldItalic.ttf') format('truetype');
+			font-weight: normal;
+			font-style: normal;
+		}
+		@font-face {
+			font-family: 'Roboto Bold';
+			src: url('font/Roboto-Bold.eot');
+			src: url('font/Roboto-Bold.eot?#iefix') format('embedded-opentype'),
+			url('font/Roboto-Bold.svg#my-font-family') format('svg'),
+			url('font/Roboto-Bold.woff') format('woff'),
+			url('font/Roboto-Bold.ttf') format('truetype');
+			font-weight: normal;
+			font-style: normal;
+		}
+		@font-face {
+			font-family: 'Roboto Regular';
+			src: url('font/Roboto-Regular.eot');
+			src: url('font/Roboto-Regular.eot?#iefix') format('embedded-opentype'),
+			url('font/Roboto-Regular.svg#my-font-family') format('svg'),
+			url('font/Roboto-Regular.woff') format('woff'),
+			url('font/Roboto-Regular.ttf') format('truetype');
+			font-weight: normal;
+			font-style: normal;
+		}
+	</style>
+	
+</head>
+<body>
+<script src="zh-canvas.js"></script>
+	<noscript>This webpage makes extensive use of JavaScript. Please enable JavaScript in your web browser to view this page.</noscript>
+	
+	<div id="openfl-content"></div>
+	
+	<script type="text/javascript">
+		lime.embed ("Squares2", "openfl-content", 800, 600, { parameters: {} });
+	</script>
+<!--客服 开始-->
+<script src="https://cdn.jsdelivr.net/gh/g8hh/g8hh.github.io/static/js/jquery.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/g8hh/g8hh.github.io/static/css/kf.css" type="text/css" media="screen" charset="utf-8">
+<script src="https://cdn.jsdelivr.net/gh/g8hh/g8hh.github.io/static/js/kf.js"></script>
+<!-- 客服 结束 -->
+<!--站长统计-->
+    <div style="display: none">
+       <script type="text/javascript" src="https://v1.cnzz.com/z_stat.php?id=1280006740&web_id=1280006740"></script>
+    </div>
+</body>
+</html>
