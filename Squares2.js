@@ -37001,7 +37001,7 @@ moczan_display_UpgradePod.prototype = $extend(openfl_display_Sprite.prototype,{
 	,costValue: null
 	,buyButton: null
 	,updateIncome: function(argTotal,argInc) {
-		this.income.set_text(argTotal + "px/s (+" + argInc + "px/s)");
+		this.income.set_text(argTotal + "像素/秒 (+" + argInc + "像素/秒)");
 	}
 	,updateLevel: function(argNormal,argBonus) {
 		this.level.set_text(argNormal + " (+" + argBonus + ")");
